@@ -22,6 +22,27 @@ Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills
 
 ### _Pseudocode:_
 
+* Main functions to include init/play as well as render
+* Function to execute when "hit" is needed for new cards by dealer or player
+    * Needs to randomize among 52 cards
+    * underlying array needs to mutate to remove exhausted cards from inital deal & hits
+* Function to determine if max of 21 is exceeded
+    * 21+ = go to loss functions
+    * < 21 = allow to Stand, Hit
+        * if hit then repeat to " > 21 ?"
+    * BONUS - allow for bet to be placed/split
+* Repeat the ability to hit essentially until user selects STAND 
+* Once user stands, revert to dealer to play through their cards
+* Dealer max set to <= 17 for logic on hit/stand
+    * if 16 or less, dealer hits until 17+
+    * Execute new caard function 
+* Once dealer has card total that's >= 17, run function that compares player vs dealer cards
+* Create alert that will notify player of win/loss
+* Button to then "Deal Again" and replay
+    * This will need to restart the play/init function
+    * Listener for click on this
+
+END
 
 
 Some of the app's features may need to be pseudocoded, that is, outlining the app's logic in a plain, informal way.
@@ -64,6 +85,7 @@ Potential upgrades once the game logic is functioning:
 
 * Jim Clark's Rep.it for [CSS Card Library](https://repl.it/@jim_clark/Use-CSS-Card-Library#index.html)
 * [Guide on How to Build a Browser Game](https://git.generalassemb.ly/SEI-CC/SEI-CC-9/blob/master/work/w01/d5/01-04-guide-to-building-a-browser-game.md)
+* [Official Rules and guide to Blackjack card game](https://bicyclecards.com/how-to-play/blackjack/)
 
 
 
