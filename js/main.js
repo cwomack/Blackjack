@@ -12,7 +12,10 @@
 Utilize the user stories and the wireframe to 
 see what needs to be tracked
 
+Analyze the application's state (data)
 
+What does the application need to "remember" 
+throughout its execution?
 
 
 

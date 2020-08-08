@@ -42,23 +42,10 @@ Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills
     * This will need to restart the play/init function
     * Listener for click on this
 
-END
-
-
-Some of the app's features may need to be pseudocoded, that is, outlining the app's logic in a plain, informal way.
-Pseudocode the app's overall functionality first.
-More detailed pseudocode for a given feature may be required later.
-Analyze the application's state (data)
-
-What does the application need to "remember" throughout its execution?
-
-
-Note that in an application with a database, we would analyze the database design during this step.
-Set up the project
 
 ### _User Stories:_
 
-* "The app's features, from the user's point of view, should be described using User Stories. User stories follow this template: As a [role], I want [feature] because [reason]. Example user story: As a player, I want to see a list of high-scores so that I know what I have to score to make the list."
+Think... "As a [role], I want [feature] because [reason]" 
 
 * When user hits play button, cards are dealt per wireframe
 * User has ability to see dealer's face up card and theirs
