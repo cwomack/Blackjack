@@ -6,6 +6,12 @@
 Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills!
 
 
+### _How to play:_
+
+The objective of the game is to beat the dealer by getting a card count (total of card face values) as close to 21 (exactly 21 is best).  It is up to each individual player if an ace is worth 1 or 11. Face cards are 10 and any other card is its "pip" value.
+
+At any given time, if a player is unsure of what to do they can leverage "the book" to determine what statistically is the best move. [Click here to see table.](https://i.imgur.com/RcNQPSk.png)
+
 ### _Technologies Used:_ 
 
 * HTML
@@ -16,7 +22,6 @@ Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills
 ### _Project Goals:_ 
 
 * Get practice using separation of the view logic (display) and business logic (application)
-* 
 * __Be less of a noob and get more 1337__
 
 
