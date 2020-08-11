@@ -1,16 +1,25 @@
 /*----- constants -----*/
 
-//Deck of 52 cards arranged as 
-
-const deck = []
-const cards = {
-    suits: [clubs, spaces, hearts, diamonds],
-    pip: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//Deck of 52 cards arranged as <masterDeck>
+const suits = ['s', 'c', 'd', 'h'];
+const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+let masterDeck = [];
+function buildMasterDeck() {
+    masterDeck = [];
+    suits.forEach(suit => {
+        ranks.forEach(card => {
+            let cardObj = {
+                suit: suit,
+                pip: card,
+            }
+            masterDeck.push(cardObj)
+        })
+    })
 }
-playerCard = 
-
-
-
+buildMasterDeck();
+console.log(masterDeck);
+let deckCopy = [...masterDeck];
+console.log(deckCopy)
 
 
 
@@ -18,14 +27,9 @@ playerCard =
 
 /*----- app's state (variables) -----*/
 /*
-Utilize the user stories and the wireframe to 
-see what needs to be tracked
-
-Analyze the application's state (data)
-
-What does the application need to "remember" 
-throughout its execution?
-
+1.) Who's turn? 
+2.) Bet
+3.) 
 
 
 
@@ -51,6 +55,37 @@ throughout its execution?
 
 
 /*----- functions -----*/
+// let render = function (shuffleDeck) {
+//     if (shuffleDeck === true);
+// };
+// let newGame;
+// const shuffleDeck = function();
+// // e-listen for the click of new game button to shuffle
+// // this will also initialize the game first time & replays
+// function (e.target) {
+//     button.addEventListener.('click', shuffleDeck)
+// }
+// // TO DO - Function to deal to player first, then dealer
+// // and it will need to mutate the underlying deck to remove
+// // the cards that have been dealt: 
+
+//TO DO - pass through the information of card randomized card to
+// visually show matching counterpart through array method to sync 
+// CSS with the card presented....  "Data-attribute" thing maybe?
+
+// run function to see if count <= 21, if so then go to dealer turn
+
+//TO DO - player must now choose hit/stand (bet will be added later)
+// so the following outcomes can happen: 
+//      1.) Hit - run function push player new card/mutate deck
+//      and run function to see if count <= 21
+//      2.) Stand - run function that pushes new card/mutate deck
+//      and go to dealer hit/stand (While 17 or more, stand)
+
+//TO DO - If player HITS then add new card to player hand and 
+// run function to see if >= 21.  If greater, bust and dealer turn. 
+
+
 /* 
 "For example, you might decide to model a game of tic-tac-toe using 
 the values of 1, -1 or null to represent whether a square holds 
