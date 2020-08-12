@@ -36,14 +36,19 @@ let playDeck = [...masterDeck];
 // Function that will randomize card
 function newPlayerCard() {
     let newCard = Math.floor(Math.random() * playDeck.length);
+    console.log(newCard)
     playerHand.push(playDeck[newCard]);
-    console.log(playerHand);
+    console.log(playerHand)
+    console.log(playDeck)
+    playDeck.splice(playDeck[newCard], 1);
+    console.log(playDeck)
 }
-newPlayerCard();
-console.log(playDeck);
+
+
+
 
 function deal() {
-    console.log("deal")
+    newPlayerCard();
 }
 
 function hit() {
