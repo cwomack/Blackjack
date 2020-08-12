@@ -32,8 +32,13 @@ buildMasterDeck();
 let playDeck = [...masterDeck];
 
 function newPlayerCard() {
+    if (playDeck.length >= 1) {
     let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
     return newCard
+} else {
+    alert("Out of Cards!");
+    playerHand;
+    }
 }
 
 function deal() {
