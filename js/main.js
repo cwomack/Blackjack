@@ -37,7 +37,7 @@ let playDeck = [...masterDeck];
 function newPlayerCard() {
     console.log(playDeck)
     let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
-    console.log(newCard)
+    console.log(newCard);
     playerHand.push(newCard);
     console.log(playerHand)
     console.log(playDeck)
