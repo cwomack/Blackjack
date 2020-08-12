@@ -1,10 +1,18 @@
 // ----- ADD COMMENTS SO THAT SOMEONE WHO'S ON WEEK 1 GETS IT -----
+
 /*----- constants -----*/
 // Build a deck with 52 cards, all suits and pips
 const suits = ['s', 'c', 'd', 'h'];
-const pips = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
-//Deck of 52 cards arranged as <masterDeck>
+const pips = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+let playerHand = [];
+let dealerHand = [];
 let masterDeck = [];
+const newGameBtn = document.getElementById('newGame');
+const hitBtn = document.getElementById('hit');
+const standBtn = document.getElementById('stand');
+const betBtn = document.getElementById('bet');
+
+//Deck of 52 cards arranged as <masterDeck>
 //Now we build the master deck with pip (card#) and suit
 //Array of objects lets us access "key: value" later
 function buildMasterDeck() {
@@ -25,33 +33,37 @@ buildMasterDeck();
 // based on cards being dealt and .pop'd out
 let playDeck = [...masterDeck];
 
-//Player cards 
-playerHand = {};
-computerHand = {};
-let pCard1 = {};
-let pCard2 = {};
-let pCard3 = {};
-let pCard4 = {};
-let pCard5 = {};
-let pCard6 = {};
-let pCard7 = {};
-
-// When starting game or "hit" button clicked run below:
-
-function renderPlayerCard1() {
-    alert('The Function renderPlayerCard1 ran!')
-};
-let dealMeIn = (event) => {
-    document.getElementById('newGameBtn').addEventListener('click', renderPlayerCard1);
-    console.log(event.target);
-    
-}
-function newCard () {
-    playerHand = {};
+// Function that will randomize card
+function newPlayerCard() {
     let newCard = Math.floor(Math.random() * playDeck.length);
-    console.log(newCard, playDeck[newCard]);
-    pCard1 = newCard;
+    playerHand.push(playDeck[newCard]);
+    console.log(playerHand);
 }
+newPlayerCard();
+console.log(playDeck);
+
+function deal() {
+    console.log("deal")
+}
+
+function hit() {
+    console.log("hit");
+}
+
+function stand() {
+    console.log("stand");
+}
+
+function bet() {
+    console.log("bet");
+}
+
+newGameBtn.addEventListener('click', deal)
+hitBtn.addEventListener('click', hit)
+standBtn.addEventListener('click', stand)
+betBtn.addEventListener('click', bet)
+
+
 
 
 
