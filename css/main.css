@@ -21,6 +21,8 @@ body{
 }
 
 .buttons {
+    display: flex;
+    justify-content: space-evenly;
     border-radius: 50%;
     background-color: gold;
 }

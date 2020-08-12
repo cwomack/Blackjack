@@ -5,7 +5,7 @@
 const suits = ['s', 'c', 'd', 'h'];
 const pips = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let playerHand = [];
-let dealerHand = [];
+let computerHand = [];
 let masterDeck = [];
 const newGameBtn = document.getElementById('newGame');
 const hitBtn = document.getElementById('hit');
@@ -31,7 +31,7 @@ buildMasterDeck();
 
 let playDeck = [...masterDeck];
 
-function newPlayerCard() {
+function freshCards() {
     if (playDeck.length >= 1) {
     let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
     return newCard
@@ -42,14 +42,23 @@ function newPlayerCard() {
 }
 
 function deal() {
-    const randomPlayerCard = newPlayerCard();
+    let randomPlayerCard = freshCards();
     playerHand.push(randomPlayerCard);
-    console.log(playerHand);
-    console.log(playDeck)
-}
-console.log(playDeck)
+    // console.log(playerHand);
+    // console.log(playDeck)
+    let randomComputerCard = freshCards();
+    computerHand.push(randomComputerCard);
 
-// ------ABOVE THIS LINE IS WORKING SO DO NOT EFFING TOUCH THIS STUFF------
+    let randomPlayerCard2 = freshCards();
+    playerHand.push(randomPlayerCard2);
+
+    let randomComputerCard2 = freshCards();
+    computerHand.push(randomComputerCard2);
+
+    console.log(playerHand);
+    console.log(computerHand);
+}
+console.log(playDeck);
 
 function hit() {
     console.log("hit");
@@ -68,6 +77,11 @@ hitBtn.addEventListener('click', hit)
 standBtn.addEventListener('click', stand)
 betBtn.addEventListener('click', bet)
 
+//Win Logic
+
+// Need to check current value of card hands
+// if 21 then win (or push if dealer has 21)
+// 
 
 
 
