@@ -1,25 +1,74 @@
+// ----- ADD COMMENTS SO THAT SOMEONE WHO'S ON WEEK 1 GETS IT -----
 /*----- constants -----*/
-
-//Deck of 52 cards arranged as <masterDeck>
+// Build a deck with 52 cards, all suits and pips
 const suits = ['s', 'c', 'd', 'h'];
-const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+const pips = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+//Deck of 52 cards arranged as <masterDeck>
 let masterDeck = [];
+//Now we build the master deck with pip (card#) and suit
+//Array of objects lets us access "key: value" later
 function buildMasterDeck() {
     masterDeck = [];
     suits.forEach(suit => {
-        ranks.forEach(card => {
+        pips.forEach(pip => {
             let cardObj = {
                 suit: suit,
-                pip: card,
+                pip: pip,
             }
             masterDeck.push(cardObj)
         })
     })
 }
 buildMasterDeck();
-console.log(masterDeck);
-let deckCopy = [...masterDeck];
-console.log(deckCopy)
+
+// This is the copy of the main deck that can be mutated
+// based on cards being dealt and .pop'd out
+let playDeck = [...masterDeck];
+
+//Player cards 
+playerHand = {};
+computerHand = {};
+let pCard1 = {};
+let pCard2 = {};
+let pCard3 = {};
+let pCard4 = {};
+let pCard5 = {};
+let pCard6 = {};
+let pCard7 = {};
+
+// When starting game or "hit" button clicked run below:
+
+function renderPlayerCard1() {
+    alert('The Function renderPlayerCard1 ran!')
+};
+let dealMeIn = (event) => {
+    document.getElementById('newGameBtn').addEventListener('click', renderPlayerCard1);
+    console.log(event.target);
+    
+}
+function newCard () {
+    playerHand = {};
+    let newCard = Math.floor(Math.random() * playDeck.length);
+    console.log(newCard, playDeck[newCard]);
+    pCard1 = newCard;
+}
+
+
+
+
+/*Jims JavaScript    
+function renderShuffledDeck() {
+shuffledDeck = [];
+while (tempDeck.length) {
+    // Get a random index for a card still in the tempDeck
+    const rndIdx = Math.floor(Math.random() * tempDeck.length);
+    // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
+    shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+}
+renderDeckInContainer(shuffledDeck, shuffledContainer);
+}
+
+
 
 
 
