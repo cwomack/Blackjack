@@ -29,26 +29,22 @@ function buildMasterDeck() {
 }
 buildMasterDeck();
 
-// This is the copy of the main deck that can be mutated
-// based on cards being dealt and .pop'd out
 let playDeck = [...masterDeck];
 
-// Function that will randomize card
 function newPlayerCard() {
-    console.log(playDeck)
     let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
-    console.log(newCard);
-    playerHand.push(newCard);
-    console.log(playerHand)
-    console.log(playDeck)
+    return newCard
 }
-
-
-
 
 function deal() {
-    newPlayerCard();
+    const randomPlayerCard = newPlayerCard();
+    playerHand.push(randomPlayerCard);
+    console.log(playerHand);
+    console.log(playDeck)
 }
+console.log(playDeck)
+
+// ------ABOVE THIS LINE IS WORKING SO DO NOT EFFING TOUCH THIS STUFF------
 
 function hit() {
     console.log("hit");
