@@ -1,7 +1,3 @@
-// ----- ADD COMMENTS SO THAT SOMEONE WHO'S ON WEEK 1 GETS IT -----
-
-/*----- constants -----*/
-// Build a deck with 52 cards, all suits and pips
 const suits = ['s', 'c', 'd', 'h'];
 const pips = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let playerHand = [];
@@ -16,14 +12,7 @@ const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
 const betBtn = document.getElementById('bet');
 
-//Deck of 52 cards arranged as <masterDeck>
-//Now we build the master deck with pip (card#) and suit
-//Array of objects lets us access "key: value" later
-
-
-// TO-DO - init ()
-// reset play
-
+//  ------------------- MASTER DECK -------------------
 function buildMasterDeck(){ 
     masterDeck = [],
     suits.forEach(function(suit) {
@@ -37,11 +26,8 @@ function buildMasterDeck(){
         });
     });
 }
-
 buildMasterDeck();
-
 let playDeck = [...masterDeck];
-
 
 function deal() {
     if (playDeck.length >= 1) {
@@ -53,6 +39,7 @@ function deal() {
     }
 };
 
+//  ------------------- PLAY F(x)'s -------------------
 function startHand() {
     let randomPlayerCard = deal();
     playerHand.push(randomPlayerCard);
@@ -71,8 +58,10 @@ function startHand() {
     newGameBtn.style.visibility = "visible";
 };
 
-// Create a new function that you call after deal that calculates
-// current score of p and c and updates score object
+function scoreReset() {
+    score.player = 0;
+    score.computer = 0;
+}
 
 function calcScore() {
     playerHand.forEach((card) => {
@@ -84,30 +73,11 @@ function calcScore() {
         // score.computer += card.value is same as below
         score.computer = score.computer + card.value 
     });
-    console.log(score)
-    console.log(playerHand)
+    console.log(score);
+    console.log(playerHand);
+    console.log(computerHand);
 }
 
-function scoreReset () {
-    score.player = 0;
-    score.computer = 0;
-}
-
-
-
-// ------- Working Above Here ------- // 
-function render () {
-}
-
-let pHandCount=[];
-let cHandCount= [];
-function tie () {
-    alert("Dealer and Player tied! Push all bets.")
-    newGameBtn.style.visibility = "visible";
-    hitBtn.style.visibility = "hidden";
-    standBtn.style.visibility = "hidden";
-    betBtn.style.visibility = "hidden";
-}
 function hit(turn = "player") {
     const whosHand = turn === 'computer' ? computerHand : playerHand;
     let randomPlayerCard = deal();
@@ -120,24 +90,47 @@ function hit(turn = "player") {
     console.log(score)
     console.log(playerHand, computerHand);
 }
-// hit("computer");
 
 function stand() {
+    
     console.log("stand");
 }
 
 function bet() {
     console.log("bet");
 }
-
+//  ------------------- EVENT LISTENERS -------------------
 newGameBtn.addEventListener('click', startHand);
 hitBtn.addEventListener('click', hit);
 standBtn.addEventListener('click', stand);
 betBtn.addEventListener('click', bet);
 
+
+
+
+
+//  ------------------- BELOW IS INCOMPLETE -------------------
+
+// function render () {
+// }
+// function tie () {
+//     alert("Dealer and Player tied! Push all bets.")
+//     newGameBtn.style.visibility = "visible";
+//     hitBtn.style.visibility = "hidden";
+//     standBtn.style.visibility = "hidden";
+//     betBtn.style.visibility = "hidden";
+// }
+
 //TO DO - pass through the information of card randomized card to
 // visually show matching counterpart through array method to sync 
 // CSS with the card presented....  "Data-attribute" thing maybe?
+
+
+
+
+
+
+
 
 
 /*----- app's state (variables) -----*/
