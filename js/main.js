@@ -1,5 +1,5 @@
 const suits = ['s', 'c', 'd', 'h'];
-const pips = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const pips = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 let playerHand = [];
 let computerHand = [];
 let masterDeck = [];
@@ -92,13 +92,24 @@ function hit(turn = "player") {
 }
 
 function stand() {
-    
+    const whosHand = turn === 'computer' ? computerHand : playerHand;
+    let randomComputerCard = deal();
+    whosHand.push(randomComputerCard);
+    if (turn === 'computer') {
+        score.computer = score.computer + randomComputerCard.value;
+    } else {
+        score.player = score.player + randomComputerCard.value;
+    }
     console.log("stand");
 }
 
 function bet() {
     console.log("bet");
 }
+
+
+
+
 //  ------------------- EVENT LISTENERS -------------------
 newGameBtn.addEventListener('click', startHand);
 hitBtn.addEventListener('click', hit);
@@ -108,11 +119,8 @@ betBtn.addEventListener('click', bet);
 
 
 
-
 //  ------------------- BELOW IS INCOMPLETE -------------------
 
-// function render () {
-// }
 // function tie () {
 //     alert("Dealer and Player tied! Push all bets.")
 //     newGameBtn.style.visibility = "visible";
