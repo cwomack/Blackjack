@@ -7,6 +7,10 @@ const pips = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let playerHand = [];
 let computerHand = [];
 let masterDeck = [];
+let score = {
+    player: 0,
+    computer: 0,
+};
 const newGameBtn = document.getElementById('newGame');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
@@ -15,54 +19,108 @@ const betBtn = document.getElementById('bet');
 //Deck of 52 cards arranged as <masterDeck>
 //Now we build the master deck with pip (card#) and suit
 //Array of objects lets us access "key: value" later
-function buildMasterDeck() {
-    masterDeck = [];
-    suits.forEach(suit => {
-        pips.forEach(pip => {
+
+
+// TO-DO - init ()
+// reset play
+
+function buildMasterDeck(){ 
+    masterDeck = [],
+    suits.forEach(function(suit) {
+        pips.forEach(function(pip) {
             let cardObj = {
                 suit: suit,
                 pip: pip,
+                value: Number(pip) || (pip=== 'A' ? 11 : 10)
             }
-            masterDeck.push(cardObj)
-        })
-    })
+            masterDeck.push(cardObj);
+        });
+    });
 }
+
 buildMasterDeck();
 
 let playDeck = [...masterDeck];
 
-function freshCards() {
-    if (playDeck.length >= 1) {
-    let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
-    return newCard
-} else {
-    alert("Out of Cards!");
-    playerHand;
-    }
-}
 
 function deal() {
-    let randomPlayerCard = freshCards();
+    if (playDeck.length >= 1) {
+        let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
+        return newCard[0];
+    } else {
+        alert("Out of Cards!");
+        playerHand;
+    }
+};
+
+function startHand() {
+    let randomPlayerCard = deal();
     playerHand.push(randomPlayerCard);
-    // console.log(playerHand);
-    // console.log(playDeck)
-    let randomComputerCard = freshCards();
+
+    let randomComputerCard = deal();
     computerHand.push(randomComputerCard);
 
-    let randomPlayerCard2 = freshCards();
+    let randomPlayerCard2 = deal();
     playerHand.push(randomPlayerCard2);
 
-    let randomComputerCard2 = freshCards();
+    let randomComputerCard2 = deal();
     computerHand.push(randomComputerCard2);
 
-    console.log(playerHand);
-    console.log(computerHand);
-}
-console.log(playDeck);
+    calcScore();
 
-function hit() {
-    console.log("hit");
+    newGameBtn.style.visibility = "visible";
+};
+
+// Create a new function that you call after deal that calculates
+// current score of p and c and updates score object
+
+function calcScore() {
+    playerHand.forEach((card) => {
+        // score.player += card.value is same as below
+        score.player = score.player + card.value
+    });
+
+    computerHand.forEach((card) => {
+        // score.computer += card.value is same as below
+        score.computer = score.computer + card.value 
+    });
+    console.log(score)
+    console.log(playerHand)
 }
+
+function scoreReset () {
+    score.player = 0;
+    score.computer = 0;
+}
+
+
+
+// ------- Working Above Here ------- // 
+function render () {
+}
+
+let pHandCount=[];
+let cHandCount= [];
+function tie () {
+    alert("Dealer and Player tied! Push all bets.")
+    newGameBtn.style.visibility = "visible";
+    hitBtn.style.visibility = "hidden";
+    standBtn.style.visibility = "hidden";
+    betBtn.style.visibility = "hidden";
+}
+function hit(turn = "player") {
+    const whosHand = turn === 'computer' ? computerHand : playerHand;
+    let randomPlayerCard = deal();
+    whosHand.push(randomPlayerCard);
+    if (turn === 'computer') {
+        score.computer = score.computer + randomPlayerCard.value;
+    } else {
+        score.player = score.player + randomPlayerCard.value;
+    }
+    console.log(score)
+    console.log(playerHand, computerHand);
+}
+// hit("computer");
 
 function stand() {
     console.log("stand");
@@ -72,37 +130,14 @@ function bet() {
     console.log("bet");
 }
 
-newGameBtn.addEventListener('click', deal)
-hitBtn.addEventListener('click', hit)
-standBtn.addEventListener('click', stand)
-betBtn.addEventListener('click', bet)
+newGameBtn.addEventListener('click', startHand);
+hitBtn.addEventListener('click', hit);
+standBtn.addEventListener('click', stand);
+betBtn.addEventListener('click', bet);
 
-//Win Logic
-
-// Need to check current value of card hands
-// if 21 then win (or push if dealer has 21)
-// 
-
-
-
-
-
-/*Jims JavaScript    
-function renderShuffledDeck() {
-shuffledDeck = [];
-while (tempDeck.length) {
-    // Get a random index for a card still in the tempDeck
-    const rndIdx = Math.floor(Math.random() * tempDeck.length);
-    // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
-    shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
-}
-renderDeckInContainer(shuffledDeck, shuffledContainer);
-}
-
-
-
-
-
+//TO DO - pass through the information of card randomized card to
+// visually show matching counterpart through array method to sync 
+// CSS with the card presented....  "Data-attribute" thing maybe?
 
 
 /*----- app's state (variables) -----*/
@@ -136,22 +171,14 @@ renderDeckInContainer(shuffledDeck, shuffledContainer);
 
 /*----- functions -----*/
 // let render = function (shuffleDeck) {
-//     if (shuffleDeck === true);
+
 // };
 // let newGame;
-// const shuffleDeck = function();
-// // e-listen for the click of new game button to shuffle
-// // this will also initialize the game first time & replays
-// function (e.target) {
-//     button.addEventListener.('click', shuffleDeck)
-// }
-// // TO DO - Function to deal to player first, then dealer
-// // and it will need to mutate the underlying deck to remove
-// // the cards that have been dealt: 
 
-//TO DO - pass through the information of card randomized card to
-// visually show matching counterpart through array method to sync 
-// CSS with the card presented....  "Data-attribute" thing maybe?
+
+
+
+
 
 // run function to see if count <= 21, if so then go to dealer turn
 

@@ -1,28 +1,22 @@
-html, body {
-    margin: 0;
-    height: 100%;
+
+* {
+  box-sizing: border-box;
 }
-body{
-    display: grid;
-    grid-template-columns: repeat (10, 10%);
-    grid-template-rows: repeat (10, 10%);
-    border-color: gray;
-    border-width: 1px;
-    background-color: green;
+
+html {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  background-image: url("https://cdn.hipwallpaper.com/i/46/65/hEiUkp.http://billsmafiahttps://www.casino.org/blog/wp-content/uploads/Blackjack-Table-1-scaled.jpg.com/wp-content/uploads/2019/08/Casino-25-of-26-1-1030x710.jpg");
+  background-size: cover;
+  background-color: green;
 }
-.playerCards, .computerCards {
-    display: grid;
-    grid-column: 1 / 10;
-    grid-row: 1 / 10;
-}
-.pCardOne { 
-    display: grid;
-    grid-area: 5 / 4 / 8 / 6;
-}
+
 
 .buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     border-radius: 50%;
     background-color: gold;
 }
