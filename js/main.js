@@ -7,10 +7,16 @@ let score = {
     player: 0,
     computer: 0,
 };
+let pBoardScore = playerArea.document.querySelector('.scoreDisplay .plyrScore')
+let cBoardScore = computerArea.document.querySelector('.scoreDisplay .compScore')
 const newGameBtn = document.getElementById('newGame');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
 const betBtn = document.getElementById('bet');
+const playerArea = document.querySelector('playerHand');
+const computerArea = document.querySelector('computerHand');
+const pCardArea = playerArea.document.querySelector('playArea');
+const cCardArea = computerArea.document.querySelector('playArea');
 
 //  ------------------- MASTER DECK -------------------
 function buildMasterDeck(){ 
@@ -34,9 +40,9 @@ function deal() {
         let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
         return newCard[0];
     } else {
-        alert("Out of Cards!");
         playerHand;
     }
+    render();
 };
 
 //  ------------------- PLAY F(x)'s -------------------
@@ -54,9 +60,34 @@ function startHand() {
     computerHand.push(randomComputerCard2);
 
     calcScore();
-
-    newGameBtn.style.visibility = "visible";
+    render();
+    newGameBtn.disabled = true;
+    hitBtn.disabled = false;
+    standBtn.disabled = false;
+    betBtn.disabled = false;
 };
+
+function init() {
+    score.player = 0;
+    score.computer = 0;
+    hitBtn.disabled = true;
+    standBtn.disabled = true;
+    betBtn.disabled = true;
+    newGameBtn.disabled = false;
+}
+
+function createCardEl(card) {
+    return `<div class="card ${card.suit}${card.pip}"></div>`
+    console.log(card)
+}
+
+function render () {
+    pBoardScore.textContent = score.player;
+    cBoardScore.textContent = score.computer;
+
+    createCardEl = '';
+    console.log(createCardEl);
+}
 
 function scoreReset() {
     score.player = 0;
