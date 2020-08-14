@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cardDeck.css">
     <link rel="stylesheet" href="css/main.css">
     <script defer src="js/main.js"></script>
     <title>Blackjack by Womack</title>
 </head>
 <body>
     <div class="hands">
+        <section class="computerHand">
+            <div class="playArea">
+                <div class="card back-red"></div>
+                <div class="card back-red"></div>
+            </div>
+        </section>
         <section class="playerHand">
             <div class="playArea">
                 <div class="card back-red"></div>
                 <div class="card back-red"></div>
             </div>
             <div class="scoreDisplay"><span class="plyrScore">0</span></div>
-        </section>
-        <section class="computerHand">
-            <div class="playArea">
-                <div class="card back-red"></div>
-                <div class="card back-red"></div>
-            </div>
-            <div class="scoreDisplay"><span class="compScore">0</span></div>
+            <div class="moneyDisplay">$0</div>
         </section>
     </div>
     <div class="controls">
-        <button class="buttons" id="newGame"> Deal me in! </button>
-        <button class="buttons" id="hit"> Hit </button>
-        <button class="buttons" id="stand"> Stand </button>
-        <button class="buttons" id="bet"> Bet </button>
+        <button class="buttons" id="newGame">Deal me in!</button>
+        <button class="buttons" id="hit">Hit</button>
+        <button class="buttons" id="stand">Stand</button>
+        <button class="buttons" id="bet">Bet</button>
+        <button class="buttons" id="nextHand">Next Hand</button>
     </div>
 </body>
 </html>

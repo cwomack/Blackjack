@@ -7,16 +7,16 @@ let score = {
     player: 0,
     computer: 0,
 };
-let pBoardScore = playerArea.document.querySelector('.scoreDisplay .plyrScore')
-let cBoardScore = computerArea.document.querySelector('.scoreDisplay .compScore')
 const newGameBtn = document.getElementById('newGame');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
 const betBtn = document.getElementById('bet');
-const playerArea = document.querySelector('playerHand');
-const computerArea = document.querySelector('computerHand');
-const pCardArea = playerArea.document.querySelector('playArea');
-const cCardArea = computerArea.document.querySelector('playArea');
+const nextHandBtn = document.getElementById('nextHand');
+const playerArea = document.querySelector('.playerHand');
+const computerArea = document.querySelector('.computerHand');
+const pCardArea = playerArea.querySelector('.playArea');
+const cCardArea = computerArea.querySelector('.playArea');
+let pBoardScore = playerArea.querySelector('.scoreDisplay .plyrScore')
 
 //  ------------------- MASTER DECK -------------------
 function buildMasterDeck(){ 
@@ -74,19 +74,30 @@ function init() {
     standBtn.disabled = true;
     betBtn.disabled = true;
     newGameBtn.disabled = false;
+    nextHandBtn.disabled - false;
+    pBoardScore.innerHTML = score.player;
 }
 
 function createCardEl(card) {
     return `<div class="card ${card.suit}${card.pip}"></div>`
-    console.log(card)
 }
 
 function render () {
     pBoardScore.textContent = score.player;
-    cBoardScore.textContent = score.computer;
+    
 
-    createCardEl = '';
-    console.log(createCardEl);
+    let playerCardHTML = '';
+    let computerCardHTML = '';
+
+    playerHand.forEach((card) => {
+        playerCardHTML += createCardEl(card);
+    })
+    pCardArea.innerHTML = playerCardHTML;
+
+    computerHand.forEach((card) => {
+        computerCardHTML += createCardEl(card);
+    })
+    cCardArea.innerHTML = computerCardHTML;
 }
 
 function scoreReset() {
@@ -114,12 +125,20 @@ function hit(turn = "player") {
     let randomPlayerCard = deal();
     whosHand.push(randomPlayerCard);
     if (turn === 'computer') {
-        score.computer = score.computer + randomPlayerCard.value;
+        score.computer += randomPlayerCard.value;
     } else {
-        score.player = score.player + randomPlayerCard.value;
+        score.player +=randomPlayerCard.value;
     }
-    console.log(score)
-    console.log(playerHand, computerHand);
+    render();
+    // revealDealerCard();   -???
+    if (score.computer === 21 || score.player > 21) {
+        win('computer');
+        return;
+    }
+    if (score.computer === score.player) {
+        win('tie');
+        return;
+    }
 }
 
 function stand() {
@@ -134,12 +153,34 @@ function stand() {
     console.log("stand");
 }
 
+function checkScores() {
+    if (score.player > 21) {
+        win('computer');
+    } else if(score)
+}
+
 function bet() {
     console.log("bet");
 }
 
+function win(whoWon) {
+    if (whoWon === 'tie') { 
+        message.textContent = "It's a tie! Push all bets back and try again."
+    } else {
+        message.textContent = `${whoWon === "player"  ? 'You win!' : 'Dealer wins, better luck next time.'}`;
+     }
+    nextHandBtn.disabled = false
+    newGameBtn.disabled = true
+    hitBtn.disabled = true
+    standBtn.disabled = true
+    betBtn.disabled = true
+}
+function nextHand() {
+    init();
+    deal();
+}
 
-
+init();
 
 //  ------------------- EVENT LISTENERS -------------------
 newGameBtn.addEventListener('click', startHand);
