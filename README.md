@@ -1,9 +1,14 @@
 # Blackjack
 
 
+
 ##  ♠️♥️♣️♦️  Welcome to "Blackjack by Womack"  ♠️♥️♣️♦️
 
 Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills!
+
+## _What the game looks like:_
+
+[Imgur](https://i.imgur.com/yzUsptu.png)
 
 
 ### _How to play:_
