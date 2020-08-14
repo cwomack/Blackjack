@@ -27,9 +27,8 @@ body {
   justify-content: center;
   align-items: center;
 }
-.scoreDisplay, .moneyDisplay {
+.scoreDisplay, .moneyDisplay, .betDisplay {
   position: absolute;
-  bottom: 0;
   height: 50px;
   background: #333333;
   color: white;
@@ -37,14 +36,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 80px;
 }
 .scoreDisplay {
   right: 0;
-  width: 50px;
+  bottom: 0;
+}
+.scoreDisplay:before,
+.betDisplay:before,
+.moneyDisplay:before {
+    display: block;
+    top: -5px;
+    position: absolute;
+    font-size: 12px;
+    background: black;
+    padding: 2px 5px;
+}
+.scoreDisplay:before {
+    content: "Score";
+}
+.betDisplay:before {
+    content: "Bet";
+}
+.moneyDisplay:before {
+    content: "Bank";
 }
 .moneyDisplay {
   left: 0;
-  width: 100px;
+  bottom: 0;
+}
+.betDisplay {
+  top: 0;
+  left: 0;
 }
 .computerHand {
  position: relative;
@@ -58,8 +81,13 @@ body {
 }
 .controls {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   background-color: #333333;
+}
+#buttonContainer, #bettingContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 #message {
   text-align: center;
@@ -75,3 +103,26 @@ body {
 .buttons:disabled {
   cursor: not-allowed;
 }
+
+#bettingContainer {
+    background-color: gold;
+    height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all .5s;
+    pointer-events: none;
+}
+
+#bettingContainer.active{ 
+    height: 100px;
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.bet {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+

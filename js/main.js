@@ -7,6 +7,10 @@ let score = {
     player: 0,
     computer: 0,
 };
+let bet = 0;
+let daBank = 500;
+const betDisplay = document.querySelector('.betDisplay');
+const moneyDisplay = document.querySelector('.moneyDisplay');
 const newGameBtn = document.getElementById('newGame');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
@@ -17,7 +21,9 @@ const computerArea = document.querySelector('.computerHand');
 const pCardArea = playerArea.querySelector('.playArea');
 const cCardArea = computerArea.querySelector('.playArea');
 const message = document.getElementById('message');
-let pBoardScore = playerArea.querySelector('.scoreDisplay .plyrScore');
+const bettingContainer = document.getElementById('bettingContainer');
+const betBtns = bettingContainer.querySelectorAll('.bet');
+const pBoardScore = playerArea.querySelector('.scoreDisplay .plyrScore');
 const defaultCardHTML = `
     <div class="card back-red"></div>
     <div class="card back-red"></div>
@@ -88,7 +94,9 @@ function init() {
     pCardArea.innerHTML = defaultCardHTML;
     cCardArea.innerHTML = defaultCardHTML;
     message.textContent = '';
-
+    bet = 0;
+    moneyDisplay.textContent = `$${daBank}`;
+    betDisplay.textContent = `$${bet}`;
 }
 
 function createCardEl(card) {
@@ -179,22 +187,38 @@ function stand() {
     };  
 }
 
-// function bet() {
-//     console.log("bet");
-// }
-
 function win(whoWon) {
     revealDealerCard();
     if (whoWon === 'tie') { 
         message.textContent = "It's a tie! Push all bets back and try again."
     } else {
         message.textContent = `${whoWon === "player"  ? 'You win!' : 'Dealer wins, better luck next time.'}`;
-     }
+    }
+    if (whoWon === 'player') {
+        payout(true);
+    } else {
+        payout(false);
+    }
     nextHandBtn.disabled = false
     newGameBtn.disabled = true
     hitBtn.disabled = true
     standBtn.disabled = true
     betBtn.disabled = true
+}
+
+function handleBet (e) {
+    let chipValue = parseInt(e.target.textContent);
+    bet += chipValue;
+    betDisplay.textContent = `$${bet}`;
+}
+
+function payout(isWin) {
+    if (isWin) {
+        daBank += (bet * 2);
+    } else {
+        daBank -= bet;
+    };
+    moneyDisplay.textContent = `$${daBank}`;
 }
 function nextHand() {
     init();
@@ -207,7 +231,12 @@ init();
 newGameBtn.addEventListener('click', startHand);
 hitBtn.addEventListener('click', hit);
 standBtn.addEventListener('click', stand);
-betBtn.addEventListener('click', bet);
+betBtn.addEventListener('click', function(){
+    bettingContainer.classList.toggle("active");
+});
+betBtns.forEach(btn => {
+    btn.addEventListener('click', handleBet)
+})
 nextHandBtn.addEventListener('click', nextHand)
 
 
