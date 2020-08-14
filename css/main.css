@@ -103,7 +103,6 @@ body {
 .buttons:disabled {
   cursor: not-allowed;
 }
-
 #bettingContainer {
     background-color: gold;
     height: 0;
@@ -112,14 +111,12 @@ body {
     transition: all .5s;
     pointer-events: none;
 }
-
 #bettingContainer.active{ 
     height: 100px;
     opacity: 1;
     pointer-events: auto;
     cursor: pointer;
 }
-
 .bet {
     width: 50px;
     height: 50px;
