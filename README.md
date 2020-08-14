@@ -10,8 +10,9 @@ Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills
 
 <img src="https://i.imgur.com/yzUsptu.png" width="500">
 
+<img src="https://i.imgur.com/CSInfRj.png" width="500">
 
-### _How to play:_
+### _Getting started:_
 
 The objective of the game is to beat the dealer by getting a card count (total of card face values) as close to 21 (exactly 21 is best).  It is up to each individual player if an ace is worth 1 or 11. Face cards are 10 and any other card is its "pip" value.
 
@@ -80,7 +81,7 @@ Think... "As a [role], I want [feature] because [reason]"
 
 
 
-### Future Improvements to come: 
+### Next Steps - Future Improvements: 
 
 * Button that will allow access to "what the book says" to do if a player is unsure in any siutation.
 
