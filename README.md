@@ -86,3 +86,5 @@ Think... "As a [role], I want [feature] because [reason]"
 * Choice between single deck, 6 deck, and other variations
 
 * Ability to split cards, double down, and required ante to play
+
+* Animations and sounds to improve user experience to be closer to casino
