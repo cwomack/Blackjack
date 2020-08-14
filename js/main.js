@@ -28,7 +28,6 @@ const defaultCardHTML = `
     <div class="card back-red"></div>
     <div class="card back-red"></div>
 `;
-
 //  ------------------- MASTER DECK -------------------
 function buildMasterDeck(){ 
     masterDeck = [],
@@ -46,7 +45,6 @@ function buildMasterDeck(){
 }
 buildMasterDeck();
 let playDeck = [...masterDeck];
-
 function deal() {
     if (playDeck.length >= 1) {
         let newCard = playDeck.splice((Math.floor(Math.random() * playDeck.length)), 1);
@@ -56,7 +54,6 @@ function deal() {
     }
     render();
 };
-
 //  ------------------- PLAY F(x)'s -------------------
 function startHand() {
     let randomPlayerCard = deal();
@@ -79,7 +76,6 @@ function startHand() {
     standBtn.disabled = false;
     betBtn.disabled = false;
 };
-
 function init() {
     score.player = 0;
     score.computer = 0;
@@ -98,11 +94,9 @@ function init() {
     moneyDisplay.textContent = `$${daBank}`;
     betDisplay.textContent = `$${bet}`;
 }
-
 function createCardEl(card) {
     return `<div class="card ${card.isHidden ? "back-red" : ""} ${card.suit}${card.pip}"></div>`
 }
-
 function render () {
     pBoardScore.textContent = score.player;
     let playerCardHTML = '';
@@ -116,24 +110,20 @@ function render () {
     })
     cCardArea.innerHTML = computerCardHTML;
 }
-
 function scoreReset() {
     score.player = 0;
     score.computer = 0;
 }
-
 function calcScore() {
     playerHand.forEach((card) => {
-        // score.player += card.value is same as below
-        score.player = score.player + card.value
+        // score.player = score.player + card.value is same as below
+        score.player += card.value
     });
-
     computerHand.forEach((card) => {
-        // score.computer += card.value is same as below
-        score.computer = score.computer + card.value 
+        // score.computer = score.computer + card.value is same as below
+        score.computer += card.value 
     });
 }
-
 function hit(turn = "player") {
     const whosHand = turn === 'computer' ? computerHand : playerHand;
     let randomPlayerCard = deal();
@@ -160,13 +150,10 @@ function hit(turn = "player") {
     if (score.player === 21){
         win('player');
     }
-    
 }
-
 function revealDealerCard() {
     cCardArea.firstChild.classList.remove('back-red');
 }
-
 function stand() {
     revealDealerCard();
     while (score.computer < 17 || score.computer < score.player) {
@@ -186,7 +173,6 @@ function stand() {
         return;
     };  
 }
-
 function win(whoWon) {
     revealDealerCard();
     if (whoWon === 'tie') { 
@@ -205,13 +191,11 @@ function win(whoWon) {
     standBtn.disabled = true
     betBtn.disabled = true
 }
-
 function handleBet (e) {
     let chipValue = parseInt(e.target.textContent);
     bet += chipValue;
     betDisplay.textContent = `$${bet}`;
 }
-
 function payout(isWin) {
     if (isWin) {
         daBank += (bet * 2);
@@ -238,96 +222,3 @@ betBtns.forEach(btn => {
     btn.addEventListener('click', handleBet)
 })
 nextHandBtn.addEventListener('click', nextHand)
-
-
-
-
-//  ------------------- BELOW IS INCOMPLETE -------------------
-
-// function tie () {
-//     alert("Dealer and Player tied! Push all bets.")
-//     newGameBtn.style.visibility = "visible";
-//     hitBtn.style.visibility = "hidden";
-//     standBtn.style.visibility = "hidden";
-//     betBtn.style.visibility = "hidden";
-// }
-
-//TO DO - pass through the information of card randomized card to
-// visually show matching counterpart through array method to sync 
-// CSS with the card presented....  "Data-attribute" thing maybe?
-
-
-
-
-
-
-
-
-
-/*----- app's state (variables) -----*/
-/*
-1.) Who's turn? 
-2.) Bet
-3.) 
-
-
-
-*/
-/*----- cached element references -----*/
-
-
-
-
-
-
-
-
-
-/*----- event listeners -----*/
-
-
-
-
-
-
-
-
-
-/*----- functions -----*/
-// let render = function (shuffleDeck) {
-
-// };
-// let newGame;
-
-
-
-
-
-
-// run function to see if count <= 21, if so then go to dealer turn
-
-//TO DO - player must now choose hit/stand (bet will be added later)
-// so the following outcomes can happen: 
-//      1.) Hit - run function push player new card/mutate deck
-//      and run function to see if count <= 21
-//      2.) Stand - run function that pushes new card/mutate deck
-//      and go to dealer hit/stand (While 17 or more, stand)
-
-//TO DO - If player HITS then add new card to player hand and 
-// run function to see if >= 21.  If greater, bust and dealer turn. 
-
-
-/* 
-"For example, you might decide to model a game of tic-tac-toe using 
-the values of 1, -1 or null to represent whether a square holds 
-Player X, Player O, or nobody, respectively. However, when it comes 
-time to transfer the app's state to the DOM, you can visualize the 
-state anyway you want, e.g., a value of 1 is "rendered" with a 
-certain image, etc."
-
-    * IDEA - make cards assigned to this value strategy when 
-    rendered they can be tied to a numerical value tied to suit and 
-    card #
-
-
-    */

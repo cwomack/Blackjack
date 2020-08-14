@@ -61,12 +61,6 @@ Think... "As a [role], I want [feature] because [reason]"
 * Message of Win/Loss/Push to user
 * Ability to deal a new hand
 
-Potential upgrades once the game logic is functioning:
-
-* CSS Styling: cards, chips, backgrounds, etc.
-* Able to place bets (bonus items would be doubling down)
-* Function for "what the book says" to do based on players hand
-* Feature to allow 1 deck or multi-deck
 
 ## Wireframe:
 
@@ -81,6 +75,14 @@ Potential upgrades once the game logic is functioning:
 
 
 
-### Notes for continued work:
+### Future Improvements to come: 
 
-* Conversion of Pseudocode to game logic (__in progress__)
+* Button that will allow access to "what the book says" to do if a player is unsure in any siutation.
+
+* Better CSS Styling to make the table feel more like a casino
+
+* Multiple player options
+
+* Choice between single deck, 6 deck, and other variations
+
+* Ability to split cards, double down, and required ante to play
