@@ -124,16 +124,13 @@ function calcScore() {
         // score.computer += card.value is same as below
         score.computer = score.computer + card.value 
     });
-    console.log(score);
-    console.log(playerHand);
-    console.log(computerHand);
 }
 
 function hit(turn = "player") {
-    console.log('hit');
     const whosHand = turn === 'computer' ? computerHand : playerHand;
     let randomPlayerCard = deal();
     whosHand.push(randomPlayerCard);
+    
     if (turn === 'computer') {
         score.computer += randomPlayerCard.value;
     } else {
@@ -152,19 +149,21 @@ function hit(turn = "player") {
         win('player');
         return;
     }
+    if (score.player === 21){
+        win('player');
+    }
+    
 }
 
 function revealDealerCard() {
-    console.log('revealDealerCard')
     cCardArea.firstChild.classList.remove('back-red');
 }
 
 function stand() {
-    console.log('stand');
     revealDealerCard();
-    while (score.computer < 17) {
+    while (score.computer < 17 || score.computer < score.player) {
         hit('computer');
-        return;
+        revealDealerCard();
     };
     if (score.computer > 21) {
         win('player');
@@ -177,19 +176,12 @@ function stand() {
     if (score.computer === score.player) {
         win('tie');
         return;
-    };   
-
+    };  
 }
 
-function checkScores() {
-    if (score.player > 21) {
-        win('computer');
-    } else if(score){}
-}
-
-function bet() {
-    console.log("bet");
-}
+// function bet() {
+//     console.log("bet");
+// }
 
 function win(whoWon) {
     revealDealerCard();
