@@ -16,7 +16,12 @@ const playerArea = document.querySelector('.playerHand');
 const computerArea = document.querySelector('.computerHand');
 const pCardArea = playerArea.querySelector('.playArea');
 const cCardArea = computerArea.querySelector('.playArea');
-let pBoardScore = playerArea.querySelector('.scoreDisplay .plyrScore')
+const message = document.getElementById('message');
+let pBoardScore = playerArea.querySelector('.scoreDisplay .plyrScore');
+const defaultCardHTML = `
+    <div class="card back-red"></div>
+    <div class="card back-red"></div>
+`;
 
 //  ------------------- MASTER DECK -------------------
 function buildMasterDeck(){ 
@@ -26,7 +31,8 @@ function buildMasterDeck(){
             let cardObj = {
                 suit: suit,
                 pip: pip,
-                value: Number(pip) || (pip=== 'A' ? 11 : 10)
+                value: Number(pip) || (pip === 'A' ? 11 : 10),
+                isHidden: false,
             }
             masterDeck.push(cardObj);
         });
@@ -51,6 +57,7 @@ function startHand() {
     playerHand.push(randomPlayerCard);
 
     let randomComputerCard = deal();
+    randomComputerCard.isHidden = true;
     computerHand.push(randomComputerCard);
 
     let randomPlayerCard2 = deal();
@@ -70,30 +77,32 @@ function startHand() {
 function init() {
     score.player = 0;
     score.computer = 0;
+    playerHand = [];
+    computerHand = [];
     hitBtn.disabled = true;
     standBtn.disabled = true;
     betBtn.disabled = true;
     newGameBtn.disabled = false;
-    nextHandBtn.disabled - false;
+    nextHandBtn.disabled = true;
     pBoardScore.innerHTML = score.player;
+    pCardArea.innerHTML = defaultCardHTML;
+    cCardArea.innerHTML = defaultCardHTML;
+    message.textContent = '';
+
 }
 
 function createCardEl(card) {
-    return `<div class="card ${card.suit}${card.pip}"></div>`
+    return `<div class="card ${card.isHidden ? "back-red" : ""} ${card.suit}${card.pip}"></div>`
 }
 
 function render () {
     pBoardScore.textContent = score.player;
-    
-
     let playerCardHTML = '';
     let computerCardHTML = '';
-
     playerHand.forEach((card) => {
         playerCardHTML += createCardEl(card);
     })
     pCardArea.innerHTML = playerCardHTML;
-
     computerHand.forEach((card) => {
         computerCardHTML += createCardEl(card);
     })
@@ -121,6 +130,7 @@ function calcScore() {
 }
 
 function hit(turn = "player") {
+    console.log('hit');
     const whosHand = turn === 'computer' ? computerHand : playerHand;
     let randomPlayerCard = deal();
     whosHand.push(randomPlayerCard);
@@ -130,7 +140,6 @@ function hit(turn = "player") {
         score.player +=randomPlayerCard.value;
     }
     render();
-    // revealDealerCard();   -???
     if (score.computer === 21 || score.player > 21) {
         win('computer');
         return;
@@ -139,24 +148,43 @@ function hit(turn = "player") {
         win('tie');
         return;
     }
+    if (score.computer > 21) {
+        win('player');
+        return;
+    }
+}
+
+function revealDealerCard() {
+    console.log('revealDealerCard')
+    cCardArea.firstChild.classList.remove('back-red');
 }
 
 function stand() {
-    const whosHand = turn === 'computer' ? computerHand : playerHand;
-    let randomComputerCard = deal();
-    whosHand.push(randomComputerCard);
-    if (turn === 'computer') {
-        score.computer = score.computer + randomComputerCard.value;
-    } else {
-        score.player = score.player + randomComputerCard.value;
+    console.log('stand');
+    revealDealerCard();
+    while (score.computer < 17) {
+        hit('computer');
+        return;
+    };
+    if (score.computer > 21) {
+        win('player');
+        return;
     }
-    console.log("stand");
+    if (score.computer > score.player && score.computer < 22){ 
+        win('computer');
+        return;
+    }; 
+    if (score.computer === score.player) {
+        win('tie');
+        return;
+    };   
+
 }
 
 function checkScores() {
     if (score.player > 21) {
         win('computer');
-    } else if(score)
+    } else if(score){}
 }
 
 function bet() {
@@ -164,6 +192,7 @@ function bet() {
 }
 
 function win(whoWon) {
+    revealDealerCard();
     if (whoWon === 'tie') { 
         message.textContent = "It's a tie! Push all bets back and try again."
     } else {
@@ -187,6 +216,7 @@ newGameBtn.addEventListener('click', startHand);
 hitBtn.addEventListener('click', hit);
 standBtn.addEventListener('click', stand);
 betBtn.addEventListener('click', bet);
+nextHandBtn.addEventListener('click', nextHand)
 
 
 
