@@ -4,9 +4,8 @@
 
 ##  ♠️♥️♣️♦️  Welcome to "Blackjack by Womack"  ♠️♥️♣️♦️
 
-Browser game built from scrath with  _Developer Level:_ __"2 weeks in"__  skills!
 
-## _What the game looks like:_
+### _What the game looks like:_
 
 <img src="https://i.imgur.com/yzUsptu.png" width="500">
 
@@ -28,7 +27,7 @@ At any given time, if a player is unsure of what to do they can leverage "the bo
 ### _Project Goals:_ 
 
 * Get practice using separation of the view logic (display) and business logic (application)
-* __Be less of a noob and get more 1337__
+* Utilize HTML, CSSC, and JavaScript in concert to make a functional web browser game. 
 
 
 ### _Pseudocode:_
